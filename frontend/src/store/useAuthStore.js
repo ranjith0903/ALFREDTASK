@@ -1,13 +1,13 @@
 import { create } from "zustand";
-import axios from "axios";
+import axios from "../lib/axios";
 
 const useAuthStore = create((set) => ({
   user: null,
 
-  register: async (name, email, password) => {
+  register: async (name, email, password,confirmPassword) => {
     try {
-      const res = await axios.post("/auth/register", 
-        { name, email, password }, 
+      const res = await axios.post("/auth/signup", 
+        { name, email, password,confirmPassword }, 
         { withCredentials: true } 
       );
       set({ user: res.data });

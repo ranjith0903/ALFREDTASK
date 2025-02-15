@@ -11,14 +11,14 @@ const generateTokens=(userid)=>{
 const setCookies = (res, accessToken, refreshToken) => {
 	res.cookie("accessToken", accessToken, {
 		httpOnly: true,
-		
-		sameSite: "strict", 
-		maxAge: 15 * 60 * 1000, 
+		sameSite: "None", // ✅ Allow cross-site cookies
+		secure: true, // ✅ Required for `None`
+		maxAge: 15 * 60 * 1000,  
 	});
 	res.cookie("refreshToken", refreshToken, {
 		httpOnly: true, 
-		
-		sameSite: "strict", 
+		sameSite: "None", // ✅ Allow cross-site cookies
+		secure: true, // ✅ Required for `None`
 		maxAge: 7 * 24 * 60 * 60 * 1000,
 	});
 };
