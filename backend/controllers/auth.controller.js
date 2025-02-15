@@ -25,22 +25,28 @@ const setCookies = (res, accessToken, refreshToken) => {
 export const registerUser = async (req, res) => {
   try {
     const { name, email, password, confirmPassword } = req.body;
+    console.log("entered backend");
     if (password !== confirmPassword) {
       return res.status(400).json({ error: "Passwords do not match" });
     }
+    console.log("Password matched");
 
     const userFound = await User.findOne({ email });
     if (userFound) {
       return res.status(400).json({ error: "User already registered" });
     }
-
+    console.log("no user found")
     const user = new User({ name, email, password });
+    console.log("user created")
     
     const { refreshToken, accessToken } = generateTokens(user._id);
+    console.log("tokens generated")
     
     user.refreshToken = refreshToken;
     await user.save();
+    console.log("user saved")
     setCookies(res, accessToken, refreshToken);
+    console.log("cookies set")
     res.status(201).json({ userId: user._id, email: user.email, message: "User registered successfully" });
   } catch (error) {
     res.status(500).json({ error: error.message || "Error registering user" });

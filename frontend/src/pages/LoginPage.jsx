@@ -12,7 +12,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await login(form.email, form.password);
-    navigate("/dashboard");
+    // navigate("/dashboard");
   };
 
   return (
@@ -48,4 +48,5 @@ const Login = () => {
 };
 
 export default Login;
+
 
