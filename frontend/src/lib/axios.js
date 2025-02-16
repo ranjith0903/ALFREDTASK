@@ -3,7 +3,7 @@ import axios from "axios";
 
 const axiosInstance = axios.create({
 	
-	baseURL: import.meta.mode==="development"?"http://localhost:8000/api":"/api",
+	baseURL: import.meta.mode==="development"?"https://alfredtask-w8am.onrender.com//api":"/api",
 	withCredentials: true, // send cookies to the server
 });
 
