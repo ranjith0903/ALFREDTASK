@@ -10,7 +10,7 @@ import { Toaster } from "react-hot-toast";
 function App() {
   return (
     <Router>
-      <div className="relative">
+      <div className="relative min-h-screen bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-white">
         <Navbar /> 
         <Routes>
           <Route path="/" element={<Signup />} />
