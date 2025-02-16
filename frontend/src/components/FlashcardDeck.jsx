@@ -5,6 +5,7 @@ import { FaTimes, FaCheck, FaEye, FaPlus } from "react-icons/fa";
 import useFlashcardsStore from "../store/useFlashCardsStore";
 import { useWindowSize } from "react-use";
 import "./FlashcardDeck.css";
+import { Link } from "react-router-dom";
 
 const FlashcardDeck = () => {
   const { flashcards, fetchFlashcards, updateFlashcard, isLoading, currentIndex, dueFlashcardsCount } = useFlashcardsStore();
@@ -47,9 +48,9 @@ const FlashcardDeck = () => {
           <br />
           There are no cards to review today.
         </p>
-        <button onClick={() => window.location.href = "/create"} className="mt-4 text-blue-600 hover:underline">
+        <Link to="/create" className="mt-4 text-blue-600 hover:underline">
           Create a new card
-        </button>
+        </Link>
       </div>
     );
   }
