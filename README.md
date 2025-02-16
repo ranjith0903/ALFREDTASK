@@ -84,28 +84,28 @@ npm run dev
 - **Express + Mongoose + MongoDB Atlas** for efficient object modeling.
 - **JWT authorization**
 - **Leitner System Logic**:
- -Receives User Response
+    -Receives User Response
 
- -The API takes an id (flashcard ID) and correct (boolean) from the request body.
- correct: true → Answered correctly.
- correct: false → Answered incorrectly.
- Fetches the Flashcard from the Database
+    -The API takes an id (flashcard ID) and correct (boolean) from the request body.
+     correct: true → Answered correctly.
+     correct: false → Answered incorrectly.
+     Fetches the Flashcard from the Database
 
- -Uses Mongoose to find the flashcard by _id and userId.
- If the flashcard is not found, returns a 404 Not Found response.
-I mplements Leitner System Logic
+    -Uses Mongoose to find the flashcard by _id and userId.
+     If the flashcard is not found, returns a 404 Not Found response.
+     I mplements Leitner System Logic
 
- -If answered correctly, the flashcard moves to the next box (up to Box 5).
- If answered incorrectly, the flashcard resets to Box 1.
- Calculates nextReview Date Based on Box Level
+    -If answered correctly, the flashcard moves to the next box (up to Box 5).
+     If answered incorrectly, the flashcard resets to Box 1.
+     Calculates nextReview Date Based on Box Level
 
- -Spaced repetition intervals are used:
- Box 1 → Review in 1 day
- Box 2 → Review in 2 days
- Box 3 → Review in 4 days
- Box 4 → Review in 7 days
- Box 5 → Review in 14 days
- Saves the Updated Flashcard to the Database
+   -Spaced repetition intervals are used:
+   Box 1 → Review in 1 day
+   Box 2 → Review in 2 days
+   Box 3 → Review in 4 days
+   Box 4 → Review in 7 days
+   Box 5 → Review in 14 days
+   Saves the Updated Flashcard to the Database
 
 -The updated flashcard with the new box level and nextReview date is saved.
 
