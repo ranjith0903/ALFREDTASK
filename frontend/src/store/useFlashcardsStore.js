@@ -3,10 +3,10 @@ import axios from "../lib/axios";
 
 const useFlashcardsStore = create((set, get) => ({
   flashcards: [],
-  
   isLoading: false,
   currentIndex: 0,
   dueFlashcardsCount: 0,
+  totalcards:0,
 
   fetchFlashcards: async () => {
     try {
@@ -87,6 +87,16 @@ const useFlashcardsStore = create((set, get) => ({
       }
     } catch (error) {
       console.error("Error deleting flashcard", error);
+    }
+  },
+  totaFlashcards: async () => {
+    try {
+      set({ isLoading: true });
+      const res = await axios.get("/flashcards", { withCredentials: true });
+      set({ totalcards: res.data.length, isLoading: false });
+    } catch (error) {
+      console.error("Error fetching all flashcards", error);
+      set({ isLoading: false });
     }
   },
 

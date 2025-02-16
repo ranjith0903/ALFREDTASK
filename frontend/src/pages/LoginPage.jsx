@@ -25,7 +25,7 @@ const Login = () => {
           name="email"
           placeholder="Email"
           onChange={handleChange}
-          className="border border-gray-300 rounded-md p-2 w-full mb-4"
+          className="border border-gray-300 rounded-md p-2 w-full mb-4 dark:bg-gray-700 dark:text-white"
           required
         />
         <input
@@ -33,7 +33,7 @@ const Login = () => {
           name="password"
           placeholder="Password"
           onChange={handleChange}
-          className="border border-gray-300 rounded-md p-2 w-full mb-4"
+          className="border border-gray-300 rounded-md p-2 w-full mb-4 dark:bg-gray-700 dark:text-white"
           required
         />
         <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md w-full">
@@ -48,5 +48,4 @@ const Login = () => {
 };
 
 export default Login;
-
 

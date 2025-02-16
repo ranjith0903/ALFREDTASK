@@ -1,35 +1,41 @@
 import { create } from "zustand";
 import axios from "../lib/axios";
+import { toast } from "react-hot-toast";
 
 const useAuthStore = create((set) => ({
   user: null,
-  loading:false,
+  loading: false,
   checkingAuth: true,
 
-  register: async (name, email, password,confirmPassword) => {
+  register: async (name, email, password, confirmPassword) => {
     set({ loading: true });
     try {
       const res = await axios.post("/auth/signup", 
-        { name, email, password,confirmPassword }, 
+        { name, email, password, confirmPassword }, 
         { withCredentials: true } 
       );
       set({ user: res.data });
+      toast.success("Registration successful");
     } catch (error) {
       set({ loading: false });
       console.error("Registration failed:", error.response?.data?.message || error.message);
+      toast.error("Registration failed");
     }
   },
 
   login: async (email, password) => {
-    set({loading:true});
+    set({ loading: true });
     try {
-      const res = await axios.post("/auth/login", { email, password },{ withCredentials: true });
+      const res = await axios.post("/auth/login", { email, password }, { withCredentials: true });
       set({ user: res.data });
+      toast.success("Login successful");
     } catch (error) {
-      set({loading:false});
+      set({ loading: false });
       console.error("Login failed:", error.response?.data?.message || error.message);
+      toast.error("Login failed");
     }
   },
+
   checkAuth: async () => {
     set({ checkingAuth: true });
     try {
@@ -42,20 +48,22 @@ const useAuthStore = create((set) => ({
 
   logout: async () => {
     try {
-      await axios.post("/auth/logout",{},{ withCredentials: true });
+      await axios.post("/auth/logout", {}, { withCredentials: true });
       set({ user: null });
+      toast.success("Logout successful");
     } catch (error) {
       console.error("Logout failed:", error);
+      toast.error("Logout failed");
     }
   },
 
   fetchUser: async () => {
-    set({loading:true})
+    set({ loading: true });
     try {
-      const res = await axios.get("/auth/profile",{ withCredentials: true });
+      const res = await axios.get("/auth/profile", { withCredentials: true });
       set({ user: res.data });
     } catch (error) {
-      set({user:null,loading:false})
+      set({ user: null, loading: false });
       console.error("Failed to fetch user:", error);
       set({ user: null });
     }

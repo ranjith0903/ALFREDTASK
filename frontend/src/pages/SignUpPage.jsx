@@ -31,7 +31,7 @@ const Signup = () => {
           name="name"
           placeholder="Name"
           onChange={handleChange}
-          className="border border-gray-300 rounded-md p-2 w-full mb-4"
+          className="border border-gray-300 rounded-md p-2 w-full mb-4 dark:bg-gray-700 dark:text-white"
           required
         />
         <input
@@ -39,7 +39,7 @@ const Signup = () => {
           name="email"
           placeholder="Email"
           onChange={handleChange}
-          className="border border-gray-300 rounded-md p-2 w-full mb-4"
+          className="border border-gray-300 rounded-md p-2 w-full mb-4 dark:bg-gray-700 dark:text-white"
           required
         />
         <input
@@ -47,7 +47,7 @@ const Signup = () => {
           name="password"
           placeholder="Password"
           onChange={handleChange}
-          className="border border-gray-300 rounded-md p-2 w-full mb-4"
+          className="border border-gray-300 rounded-md p-2 w-full mb-4 dark:bg-gray-700 dark:text-white"
           required
         />
         <input
@@ -55,7 +55,7 @@ const Signup = () => {
           name="confirmPassword"
           placeholder="Confirm Password"
           onChange={handleChange}
-          className="border border-gray-300 rounded-md p-2 w-full mb-4"
+          className="border border-gray-300 rounded-md p-2 w-full mb-4 dark:bg-gray-700 dark:text-white"
           required
         />
         <button
@@ -76,3 +76,4 @@ const Signup = () => {
 };
 
 export default Signup;
+

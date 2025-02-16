@@ -41,7 +41,7 @@ function App() {
           <Route path="/" element={user ? <FlashcardDeck /> : <Navigate to="/login" />} />
           <Route path="/nologin" element={<NoLogin />} />
         </Routes>
-        <Toaster />
+      <Toaster/>
       </div>
     </Router>
   );
