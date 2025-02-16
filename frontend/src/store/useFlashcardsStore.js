@@ -7,7 +7,8 @@ const useFlashcardsStore = create((set, get) => ({
   currentIndex: 0,
   dueFlashcardsCount: 0,
   totalcards:0,
-
+  
+//fetch flashcards
   fetchFlashcards: async () => {
     try {
       set({ isLoading: true });
@@ -25,6 +26,8 @@ const useFlashcardsStore = create((set, get) => ({
     }
   },
 
+  //fetch all flashcards
+
   fetchAllFlashcards: async () => {
     try {
       set({ isLoading: true });
@@ -37,6 +40,7 @@ const useFlashcardsStore = create((set, get) => ({
     }
   },
 
+  //create flashcard
   createFlashcard: async (flashcardData) => {
     try {
       const res = await axios.post("/flashcards", flashcardData, { withCredentials: true });
@@ -49,7 +53,7 @@ const useFlashcardsStore = create((set, get) => ({
       console.error("Error creating flashcard", error);
     }
   },
-
+//updateFlashcard
   updateFlashcard: async (id, correct) => {
     try {
       await axios.put(`/flashcards/${id}`, { correct }, { withCredentials: true });
@@ -73,6 +77,8 @@ const useFlashcardsStore = create((set, get) => ({
     }
   },
 
+  //deleteFlashcard
+
   deleteFlashcard: async (id) => {
     try {
       await axios.delete(`/flashcards/${id}`, { withCredentials: true });
@@ -89,17 +95,8 @@ const useFlashcardsStore = create((set, get) => ({
       console.error("Error deleting flashcard", error);
     }
   },
-  totaFlashcards: async () => {
-    try {
-      set({ isLoading: true });
-      const res = await axios.get("/flashcards", { withCredentials: true });
-      set({ totalcards: res.data.length, isLoading: false });
-    } catch (error) {
-      console.error("Error fetching all flashcards", error);
-      set({ isLoading: false });
-    }
-  },
-
+  
+//nextFlashcard
   nextFlashcard: () => {
     set((state) => ({
       currentIndex: Math.min(state.currentIndex + 1, state.flashcards.length - 1)
@@ -108,4 +105,5 @@ const useFlashcardsStore = create((set, get) => ({
 }));
 
 export default useFlashcardsStore;
+
 

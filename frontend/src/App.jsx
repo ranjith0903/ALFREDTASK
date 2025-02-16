@@ -12,7 +12,7 @@ import { useEffect } from "react";
 
 
 function App() {
-  const { user, checkAuth, checkingAuth } = useAuthStore();
+  const { user, checkAuth } = useAuthStore();
   useEffect(() => {
     checkAuth();
   }, [checkAuth]);

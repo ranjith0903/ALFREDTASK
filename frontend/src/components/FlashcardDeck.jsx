@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { FaTimes, FaCheck, FaEye } from "react-icons/fa";
+import Confetti from "react-confetti";
+import { FaTimes, FaCheck, FaEye, FaPlus } from "react-icons/fa";
 import useFlashcardsStore from "../store/useFlashCardsStore";
+import { useWindowSize } from "react-use";
 import "./FlashcardDeck.css";
-import { Link } from "react-router-dom";
 
 const FlashcardDeck = () => {
-  const { flashcards, fetchFlashcards, updateFlashcard, isLoading, currentIndex } = useFlashcardsStore();
+  const { flashcards, fetchFlashcards, updateFlashcard, isLoading, currentIndex, dueFlashcardsCount } = useFlashcardsStore();
   const [showAnswer, setShowAnswer] = useState(false);
   const [swipeDirection, setSwipeDirection] = useState(null);
+  const [isCompleted, setIsCompleted] = useState(false);
+  const { width, height } = useWindowSize();
 
   useEffect(() => {
     fetchFlashcards();
@@ -16,7 +19,10 @@ const FlashcardDeck = () => {
 
   useEffect(() => {
     setShowAnswer(false);
-  }, [flashcards]);
+    if (flashcards.length === 0 && !isLoading) {
+      setIsCompleted(true);
+    }
+  }, [flashcards, isLoading]);
 
   const handleResponse = (correct, direction) => {
     if (!flashcards[currentIndex]) return;
@@ -33,26 +39,34 @@ const FlashcardDeck = () => {
     return <p className="text-lg text-center text-gray-500 mt-10">Loading flashcards...</p>;
   }
 
-  // ✅ Show message when there are no due flashcards
-  if (flashcards.length === 0) {
+  if (isCompleted) {
     return (
-      <div className="flex flex-col items-center justify-center h-screen p-6">
-        <p className="text-xl font-semibold text-gray-700 dark:text-gray-300 text-center">
-          No cards to review. Create one!
+      <div className="flex flex-col items-center justify-center h-screen bg-gray-100 dark:bg-gray-900 p-6">
+        <p className="text-lg text-center text-gray-500 mt-10">
+          You're all caught up! 🎉
+          <br />
+          There are no cards to review today.
         </p>
-        <Link to="/create">
-          <button className="mt-6 px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-md">
-            Create a flashcard
-          </button>
-        </Link>
+        <button onClick={() => window.location.href = "/create"} className="mt-4 text-blue-600 hover:underline">
+          Create a new card
+        </button>
       </div>
     );
   }
 
-  const flashcard = flashcards[currentIndex];
+  const flashcard = flashcards[currentIndex] || null;
+  if (!flashcard) {
+    return (
+      <p className="text-lg text-center text-gray-500 mt-10">No flashcards available.</p>
+    );
+  }
 
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-gray-100 dark:bg-gray-900 p-6">
+      <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
+        {dueFlashcardsCount > 0 ? `${dueFlashcardsCount} cards due` : "No cards due today! 🎯"}
+      </p>
+
       <motion.div
         key={flashcard._id}
         className="flashcard-card"
@@ -83,3 +97,4 @@ const FlashcardDeck = () => {
 };
 
 export default FlashcardDeck;
+

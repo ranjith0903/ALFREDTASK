@@ -14,12 +14,12 @@ const useAuthStore = create((set) => ({
         { name, email, password, confirmPassword }, 
         { withCredentials: true } 
       );
-      set({ user: res.data });
+      set({ user: res.data, loading: false });
       toast.success("Registration successful");
     } catch (error) {
       set({ loading: false });
       console.error("Registration failed:", error.response?.data?.message || error.message);
-      toast.error("Registration failed");
+      toast.error(error.response?.data?.message || "Registration failed");
     }
   },
 
@@ -27,12 +27,12 @@ const useAuthStore = create((set) => ({
     set({ loading: true });
     try {
       const res = await axios.post("/auth/login", { email, password }, { withCredentials: true });
-      set({ user: res.data });
+      set({ user: res.data, loading: false });
       toast.success("Login successful");
     } catch (error) {
       set({ loading: false });
       console.error("Login failed:", error.response?.data?.message || error.message);
-      toast.error("Login failed");
+      toast.error(error.response?.data?.message || "Login failed");
     }
   },
 
@@ -61,7 +61,7 @@ const useAuthStore = create((set) => ({
     set({ loading: true });
     try {
       const res = await axios.get("/auth/profile", { withCredentials: true });
-      set({ user: res.data });
+      set({ user: res.data, loading: false });
     } catch (error) {
       set({ user: null, loading: false });
       console.error("Failed to fetch user:", error);

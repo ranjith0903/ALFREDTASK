@@ -1,24 +1,32 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import useFlashcardsStore from "../store/useFlashCardsStore";
 import { FaTrash } from "react-icons/fa";
 
 const Manage = () => {
   const { flashcards, fetchAllFlashcards, deleteFlashcard } = useFlashcardsStore();
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    fetchAllFlashcards();
+    const fetch = async () => {
+      setIsLoading(true);
+      await fetchAllFlashcards();
+      setIsLoading(false);
+    };
+    fetch();
   }, []);
 
   return (
-    <div className="p-6">
-      <h2 className="text-2xl font-bold mb-4">Manage Flashcards</h2>
+    <div className="p-6 md:p-12">
+      <h2 className="text-2xl font-bold mb-4 md:mb-8">Manage Flashcards</h2>
 
-      {flashcards.length === 0 ? (
+      {isLoading ? (
+        <p className="text-gray-500">Loading...</p>
+      ) : flashcards.length === 0 ? (
         <p className="text-gray-500">No flashcards available.</p>
       ) : (
-        <ul className="space-y-4">
+        <ul className="space-y-4 md:space-y-8">
           {flashcards.map((flashcard) => (
-            <li key={flashcard._id} className="flex justify-between items-center p-4 bg-white dark:bg-gray-800 shadow rounded-lg">
+            <li key={flashcard._id} className="flex justify-between items-center p-4 bg-white dark:bg-gray-800 shadow rounded-lg md:p-6">
               <div>
                 <p className="font-semibold text-gray-900 dark:text-white">{flashcard.question}</p>
                 <p className="text-gray-600 dark:text-gray-400">{flashcard.answer}</p>
