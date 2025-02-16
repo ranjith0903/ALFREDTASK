@@ -1,5 +1,5 @@
 import express from "express";
-import { createFlashcard, getFlashcards, getDueFlashcards, updateFlashcard, deleteFlashcard } from "../controllers/flashcard.controller.js";
+import { createFlashcard, getFlashcards, getDueFlashcards, updateFlashcard, deleteFlashcard } from "../controllers/flashCard.controller.js";
 import { protectRoute } from "../middleware/auth.middleware.js";
 const router = express.Router();
 
