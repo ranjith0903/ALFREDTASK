@@ -3,6 +3,7 @@ import axios from "../lib/axios";
 
 const useFlashcardsStore = create((set, get) => ({
   flashcards: [],
+  
   isLoading: false,
   currentIndex: 0,
   dueFlashcardsCount: 0,

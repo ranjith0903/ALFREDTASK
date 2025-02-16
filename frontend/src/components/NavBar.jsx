@@ -20,7 +20,7 @@ const Navbar = () => {
       <h1 className="text-2xl font-bold">LeitnerLearn</h1>
 
       <div className="flex items-center space-x-6">
-        <Link to="/dashboard" className="hover:underline">Home</Link>
+        <Link to="/" className="hover:underline">Home</Link>
         <Link to="/manage" className="hover:underline">Manage</Link>
         <Link to="/create" className="hover:underline">Create</Link>
       </div>
